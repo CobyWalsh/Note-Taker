@@ -9,8 +9,15 @@ module.exports = app => {
 
         var notes = JSON.parse(data);
         console.log(notes);
-
+    
         app.get("/api/notes", function(req, res) {
+            fs.readFile("db/db.json","utf8", (err, data) => {
+
+                if (err) throw err;
+        
+                var notes = JSON.parse(data);
+                console.log(notes);
+        
             console.log(notes);
             res.json(notes);
         });
@@ -48,5 +55,5 @@ module.exports = app => {
         }
 
     });
-
-}
+    }
+    )}

@@ -23,6 +23,12 @@ module.exports = app => {
         });
 
         app.post("/api/notes", function(req, res) {
+            fs.readFile("db/db.json", (err, data) => {
+                if (err) throw err;
+                JSON.parse(data, "");
+                data.push("");
+                res.json(data);
+            })
             let newNote = req.body;
             notes.push(newNote);
             updateDb();
@@ -34,6 +40,12 @@ module.exports = app => {
         });
 
         app.delete("/api/notes/:id", function(req, res) {
+            fs.readFile("db/db.json", (err, data) => {
+                if (err) throw err;
+                JSON.splice(data, "");
+                data.push("");
+                res.json(data);
+            })
             notes.splice(req.params.id, 1);
             updateDb();
             console.log("Deleted note with id "+req.params.id);

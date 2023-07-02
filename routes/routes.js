@@ -44,9 +44,9 @@ router.delete('/notes', (req, res) => {
         });
 
         // function updateDb() {
-            fs.writeFile("db/db.json",JSON.stringify(data,'\t'),err => {
-                if (err) throw err;
-                return true;
-            });
-        
+        //     fs.writeFile("db/db.json",JSON.stringify(data,'\t'),err => {
+        //         if (err) throw err;
+        //         return true;
+        //     });
+        // }
         module.exports = router

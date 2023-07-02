@@ -1,71 +1,52 @@
+const { json } = require('express');
 const fs = require('fs');
 const path = require('path');
+const router = require('express').Router()
 
-module.exports = app => {
+router.get('/', (req, res) => {
 
-    fs.readFile("db/db.json","utf8", (err, data) => {
+    fs.readFile("db/db.json", "utf8", (err, data) => {
 
         if (err) throw err;
 
         var notes = JSON.parse(data);
-        console.log(notes);
-    
-        app.get("/api/notes", function(req, res) {
-            fs.readFile("db/db.json","utf8", (err, data) => {
+        console.log(notes)
+        res.json(notes);
+    });
+});
 
-                if (err) throw err;
-        
-                var notes = JSON.parse(data);
-                console.log(notes);
-        
-            console.log(notes);
-            res.json(notes);
-        });
+router.post('/notes', (req, res) => {
+    fs.readFile("db/db.json", "utf8", (err, data) => {
+    if (err) throw err;
 
-        app.post("/api/notes", function(req, res) {
-            fs.readFile("db/db.json", (err, data) => {
-                if (err) throw err;
-                JSON.parse(notes, "");
-                req.body("");
-                res.json(notes);
-            })
-            let newNote = req.body;
-            notes.push(newNote);
-            updateDb();
-            return console.log("Added new note: "+newNote.title);
-        });
+    var notes = JSON.parse(data);
+    console.log(notes)
+    res.json(notes);
+    });
+});
 
-        app.get("/api/notes/:id", function(req,res) {
-            res.json(notes[req.params.id]);
-        });
+router.delete('/notes', (req, res) => {
+    fs.readFile("db/db.json", "utf8", (err, data) => {
+    if (err) throw err;
 
-        app.delete("/api/notes/:id", function(req, res) {
-            fs.readFile("db/db.json", (err, data) => {
-                if (err) throw err;
-                JSON.splice(notes, "");
-                req.body("");
-                res.json(notes);
-            })
-            notes.splice(req.params.id, 1);
-            updateDb();
-            console.log("Deleted note with id "+req.params.id);
-        });
+    var notes = JSON.filter(data);
+    console.log(notes)
+    res.json(notes);
+    });
+});
 
-        app.get('/notes', function(req,res) {
+        router.get('/notes', function(req,res) {
             res.sendFile(path.join(__dirname, "../public/notes.html"));
         });
       
-        app.get('*', function(req,res) {
+        router.get('*', function(req,res) {
             res.sendFile(path.join(__dirname, "../public/index.html"));
         });
 
-        function updateDb() {
-            fs.writeFile("db/db.json",JSON.stringify(notes,'\t'),err => {
+        // function updateDb() {
+            fs.writeFile("db/db.json",JSON.stringify(data,'\t'),err => {
                 if (err) throw err;
                 return true;
             });
-        }
-
-    });
-    }
-    )}
+        
+        module.exports = router

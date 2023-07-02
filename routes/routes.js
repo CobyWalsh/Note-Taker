@@ -8,8 +8,10 @@ module.exports = app => {
         if (err) throw err;
 
         var notes = JSON.parse(data);
+        console.log(notes);
 
         app.get("/api/notes", function(req, res) {
+            console.log(notes);
             res.json(notes);
         });
 

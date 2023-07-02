@@ -25,9 +25,9 @@ module.exports = app => {
         app.post("/api/notes", function(req, res) {
             fs.readFile("db/db.json", (err, data) => {
                 if (err) throw err;
-                JSON.parse(data, "");
-                data.push("");
-                res.json(data);
+                JSON.parse(notes, "");
+                req.body("");
+                res.json(notes);
             })
             let newNote = req.body;
             notes.push(newNote);
@@ -42,9 +42,9 @@ module.exports = app => {
         app.delete("/api/notes/:id", function(req, res) {
             fs.readFile("db/db.json", (err, data) => {
                 if (err) throw err;
-                JSON.splice(data, "");
-                data.push("");
-                res.json(data);
+                JSON.splice(notes, "");
+                req.body("");
+                res.json(notes);
             })
             notes.splice(req.params.id, 1);
             updateDb();

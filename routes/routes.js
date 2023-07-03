@@ -1,5 +1,8 @@
 const { json } = require('express');
 const fs = require('fs');
+const router = require('express').Router();
+
+
 
 router.get('/', (req, res) => {
 
@@ -32,3 +35,5 @@ router.delete('/notes', (req, res) => {
     res.json(notes);
     });
 });
+
+module.exports = router;

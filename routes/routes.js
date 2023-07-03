@@ -1,7 +1,5 @@
 const { json } = require('express');
 const fs = require('fs');
-const path = require('path');
-const router = require('express').Router()
 
 router.get('/', (req, res) => {
 
@@ -34,19 +32,3 @@ router.delete('/notes', (req, res) => {
     res.json(notes);
     });
 });
-
-        router.get('/notes', function(req,res) {
-            res.sendFile(path.join(__dirname, "./public/notes.html"));
-        });
-      
-        router.get('*', function(req,res) {
-            res.sendFile(path.join(__dirname, "./public/index.html"));
-        });
-
-        // function updateDb() {
-        //     fs.writeFile("db/db.json",JSON.stringify(data,'\t'),err => {
-        //         if (err) throw err;
-        //         return true;
-        //     });
-        // }
-        module.exports = router

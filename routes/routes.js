@@ -6,7 +6,7 @@ const store = require('../db/store');
 // gets and reads the notes from the db and browser
 router.get('/', (req, res) => {
     fs.readFile("db/db.json", "utf8", (err, data) => {
-    if (err) throw err;
+        if (err) throw err;
 
         var notes = JSON.parse(data);
         console.log(notes)
@@ -32,6 +32,7 @@ router.delete('/notes', (req, res) => {
         console.log(notes)
         res.json(notes);
     });
+
 });
 
 // imoports the module

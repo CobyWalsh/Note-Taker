@@ -20,22 +20,28 @@ class Store {
       return this.read().then((notes) => {
         var notes = JSON.parse(notes);
         console.log(notes)
-        res.json(uuidv1,"");
+        res.json(notes);
       });
     }
   
     // adds note to browser
-    addNote(note) {
+    addNote(notes) {
+        const userNote = {};
         var notes = JSON.parse(data);
         console.log(notes)
-        res.json(uuidv1, "");
+        res.json(notes);
+        notes.push(userNote);
+    //then we redirect it to the root route
+  res.redirect('/');
     }
   
     removeNote(id) {
       // Get all notes, remove the note with the given id, write the filtered notes
       var notes = JSON.filter(data);
       console.log(notes)
-      res.json(uuidv1);
+      res.json(notes);
+      note = deleteNotes;
+    return res.redirect('/');
     }
   }
   

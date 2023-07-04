@@ -15,7 +15,7 @@ class Store {
     write(note) {
       return writeFileAsync('db/db.json', JSON.stringify(note));
     }
-  
+    // recieves the notes user writes
     getNotes() {
       return this.read().then((notes) => {
         var notes = JSON.parse(notes);
@@ -24,6 +24,7 @@ class Store {
       });
     }
   
+    // adds note to browser
     addNote(note) {
         var notes = JSON.parse(data);
         console.log(notes)

@@ -4,7 +4,7 @@ const router = require('express').Router();
 const store = require('../db/store');
 
 // gets and reads the notes from the db and browser
-router.get('/', (req, res) => {
+router.get('/notes', (req, res) => {
     fs.readFile("db/db.json", "utf8", (err, data) => {
         if (err) throw err;
 

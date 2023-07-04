@@ -2,14 +2,14 @@
 const express = require("express");
 const fs = require("fs");
 const path = require('path');
-const apiRoutes = require("./routes/routes");
+const apiRoutes = require("./routes/apiroutes");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const htmlRoutes = require('./routes/htmlRoutes');
 
 // uses express to send data to specific file using the const used above
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.use(express.static('public'))
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes);

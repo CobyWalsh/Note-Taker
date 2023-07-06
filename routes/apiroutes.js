@@ -1,18 +1,36 @@
 const { json } = require('express');
 const fs = require('fs');
 const router = require('express').Router();
-const store = require('../db/store');
 const uuid = require('uuid');
+const {
+    readFromFile,
+    readAndAppend,
+    writeToFile,
+  } = require('../helpers/fsUtils');
+  
 
 // gets and reads the notes from the db and browser
-router.get('/notes', (req, res) => {
-    fs.readFile("db/db.json", "utf8", (err, data) => {
-        if (err) throw err;
-        const notes = JSON.parse(data);
-        console.log(notes)
-        res.json(notes);
-    });
-});
+router.get('/notes_id', (req, res) => {
+    const dataId = req.params.data_id;
+    readFromFile('/db/db.json')
+      .then((data) => JSON.parse(data))
+      .then((json) => {
+        const result = json.filter((tip) => data.data_id === dataId);
+        return result.length > 0
+          ? res.json(result)
+          : res.json('No tip with that ID');
+      });
+  });
+  
+
+// router.get('/notes', (req, res) => {
+//     fs.readFile("db/db.json", "utf8", (err, data) => {
+//         if (err) throw err;
+//         const notes = JSON.parse(data);
+//         console.log(notes)
+//         res.json(notes);
+//     });
+// });
 
 // posts the notes to the browser
 router.post('/notes', (req, res) => {
@@ -23,17 +41,26 @@ router.post('/notes', (req, res) => {
     fs.readFile("db/db.json", "utf8", (err, data) => {
         if (err) throw err;
         console.log('data is ', data);
-        const dataArray = JSON.parse(data)
+        // const dataArray = JSON.parse(data)
         // otherwise if no error, add the title and text to the db.json file
+        if (req.body) {
         const noteToAdd = {
             title,
             text,
             //id: uuid()
-        }
+        };
+
+        readAndAppend(data, '/db/db.json');
+    res.json(`Tip added successfully 🚀`);
+  } else {
+    res.error('Error in adding tip');
+  }
+
         // I will push my noteToAdd to the end of my data array; remember, the data is in the shape
         // of an array, so I can push notes to the end of it
-        dataArray.push(noteToAdd);
+        // dataArray.push(noteToAdd);
         // now, rewrite the contents of the db.json file with the updated data array
+        
         fs.writeFile('db/db.json', JSON.stringify(data), (err) =>
             err ? console.error(err) : console.log('Success!')
         )

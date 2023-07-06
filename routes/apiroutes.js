@@ -37,21 +37,21 @@ router.post('/notes', (req, res) => {
         fs.writeFile('db/db.json', JSON.stringify(data), (err) =>
             err ? console.error(err) : console.log('Success!')
         )
-        res.json('db.json file now looks like', data);
+        res.status(200).json(data);
     });
 });
 
 // works with the delete button in html to delete the note  from the browser
-router.delete('/notes', (req, res) => {
-    fs.readFile("db/db.json", "utf8", (err, data) => {
-        if (err) throw err;
+// router.delete('/notes', (req, res) => {
+//     fs.readFile("db/db.json", "utf8", (err, data) => {
+//         if (err) throw err;
 
-        var notes = JSON.filter(data);
-        console.log(notes)
-        res.json(notes);
-    });
+//         var notes = JSON.filter(data);
+//         console.log(notes)
+//         res.json(notes);
+//     });
 
-});
+// });
 
 // imoports the module
 module.exports = router;

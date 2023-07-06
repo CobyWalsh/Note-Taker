@@ -11,11 +11,11 @@ const {
 
 // gets and reads the notes from the db and browser
 router.get('/notes_id', (req, res) => {
-    const dataId = req.params.data_id;
-    readFromFile('/db/db.json')
+    const notesId = req.params.notes_id;
+    readFromFile('./db/db.json')
       .then((data) => JSON.parse(data))
       .then((json) => {
-        const result = json.filter((data) => data.notes_id === dataId);
+        const result = json.filter((data) => data.notes_id === notesId);
         return result.length > 0
           ? res.json(result)
           : res.json('No tip with that ID');
@@ -34,15 +34,15 @@ router.get('/notes_id', (req, res) => {
 
 // DELETE Route for a specific tip
 // router.delete('/notes_id', (req, res) => {
-//     const dataId = req.params.data_id;
+//     const notesId = req.params.notes_id;
 //     readFromFile('/db/db.json')
 //       .then((data) => JSON.parse(data))
 //       .then((json) => {
 //         // Make a new array of all tips except the one with the ID provided in the URL
-//         const result = json.filter((data) => data.notes_id !== dataId);
+//         const result = json.filter((data) => data.notes_id !== notesId);
   
 //         // Save that array to the filesystem
-//         writeToFile('./db/db.json', result);
+//         writeToFile('/db/db.json', result);
   
 //         // Respond to the DELETE request
 //         res.json(`Item ${notesId} has been deleted 🗑️`);
@@ -68,7 +68,7 @@ router.post('/notes', (req, res) => {
             //id: uuid()
         };
 
-        readAndAppend(data, '/db/db.json');
+        readAndAppend(data, './db/db.json');
     res.json(`Tip added successfully 🚀`);
   } else {
     res.error('Error in adding tip');
@@ -79,10 +79,10 @@ router.post('/notes', (req, res) => {
         // dataArray.push(noteToAdd);
         // now, rewrite the contents of the db.json file with the updated data array
         
-        fs.writeFile('db/db.json', JSON.stringify(data), (err) =>
-            err ? console.error(err) : console.log('Success!')
-        )
-        res.status(200).json(data);
+        // fs.writeFile('db/db.json', JSON.stringify(data), (err) =>
+        //     err ? console.error(err) : console.log('Success!')
+        // )
+        // res.status(200).json(data);
     });
 });
 

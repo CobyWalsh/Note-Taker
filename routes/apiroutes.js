@@ -15,7 +15,7 @@ router.get('/notes_id', (req, res) => {
     readFromFile('/db/db.json')
       .then((data) => JSON.parse(data))
       .then((json) => {
-        const result = json.filter((tip) => data.data_id === dataId);
+        const result = json.filter((data) => data.notes_id === dataId);
         return result.length > 0
           ? res.json(result)
           : res.json('No tip with that ID');
@@ -31,6 +31,24 @@ router.get('/notes_id', (req, res) => {
 //         res.json(notes);
 //     });
 // });
+
+// DELETE Route for a specific tip
+// router.delete('/notes_id', (req, res) => {
+//     const dataId = req.params.data_id;
+//     readFromFile('/db/db.json')
+//       .then((data) => JSON.parse(data))
+//       .then((json) => {
+//         // Make a new array of all tips except the one with the ID provided in the URL
+//         const result = json.filter((data) => data.notes_id !== dataId);
+  
+//         // Save that array to the filesystem
+//         writeToFile('./db/db.json', result);
+  
+//         // Respond to the DELETE request
+//         res.json(`Item ${notesId} has been deleted 🗑️`);
+//       });
+//   });
+  
 
 // posts the notes to the browser
 router.post('/notes', (req, res) => {

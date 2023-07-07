@@ -6,22 +6,22 @@ const {
     readFromFile,
     readAndAppend,
     writeToFile,
-  } = require('../helpers/fsUtils');
-  
+} = require('../helpers/fsUtils');
+
 
 // gets and reads the notes from the db and browser
 router.get('/notes_id', (req, res) => {
     const notesId = req.params.notes_id;
     readFromFile('./db/db.json')
-      .then((data) => JSON.parse(data))
-      .then((json) => {
-        const result = json.filter((data) => data.notes_id === notesId);
-        return result.length > 0
-          ? res.json(result)
-          : res.json('No tip with that ID');
-      });
-  });
-  
+        .then((data) => JSON.parse(data))
+        .then((json) => {
+            const result = json.filter((data) => data.notes_id === notesId);
+            return result.length > 0
+                ? res.json(result)
+                : res.json('No tip with that ID');
+        });
+});
+
 
 router.get('/notes', (req, res) => {
     res.json({
@@ -32,7 +32,7 @@ router.get('/notes', (req, res) => {
     fs.readFile("./db/db.json", "utf8", (err, data) => {
         console.log(data)
         if (err) throw err;
-        
+
     });
 });
 
@@ -40,19 +40,19 @@ router.get('/notes', (req, res) => {
 router.delete('/notes_id', (req, res) => {
     const notesId = req.params.notes_id;
     readFromFile('./db/db.json')
-      .then((data) => JSON.parse(data))
-      .then((json) => {
-        // Make a new array of all tips except the one with the ID provided in the URL
-        const result = json.filter((data) => data.notes_id !== notesId);
-  
-        // Save that array to the filesystem
-        writeToFile('./db/db.json', result);
-  
-        // Respond to the DELETE request
-        res.json(`Item ${notesId} has been deleted 🗑️`);
-      });
-  });
-  
+        .then((data) => JSON.parse(data))
+        .then((json) => {
+            // Make a new array of all tips except the one with the ID provided in the URL
+            const result = json.filter((data) => data.notes_id !== notesId);
+
+            // Save that array to the filesystem
+            writeToFile('./db/db.json', result);
+
+            // Respond to the DELETE request
+            res.json(`Item ${notesId} has been deleted 🗑️`);
+        });
+});
+
 
 // posts the notes to the browser
 router.post('/notes', (req, res) => {
@@ -71,22 +71,18 @@ router.post('/notes', (req, res) => {
         // const dataArray = JSON.parse(data)
         // otherwise if no error, add the title and text to the db.json file
         if (req.body) {
-        const noteToAdd = {
-            title,
-            text,
-            id: uuidv1()
-        };
+            const noteToAdd = {
+                title,
+                text,
+                id: uuidv1()
+            };
 
-        readAndAppend(data, './db/db.json');
-    res.json(`Tip added successfully 🚀`);
-  } else {
-    res.error('Error in adding tip');
-  }
-        
-//         fs.writeFile('db/db.json', JSON.stringify(data), (err) =>
-//             err ? console.error(err) : console.log('Success!')
-//         )
-//         res.status(200).json(data);
+            readAndAppend(data, './db/db.json');
+            res.json(`Tip added successfully 🚀`);
+        } else {
+            res.error('Error in adding tip');
+        }
+
     });
 });
 // imoports the module

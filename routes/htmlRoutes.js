@@ -6,9 +6,9 @@ router.get('/notes', function(req,res) {
     res.sendFile(path.join(__dirname, "../public/notes.html"));
 });
 // listens for a GET request from any path or endpoint and sends the request to index.html
-// router.get('*', function(req,res) {
-//     res.sendFile(path.join(__dirname, "../public/index.html"));
-// });
+router.get('*', function(req,res) {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+});
 
 // imports the module
 module.exports = router

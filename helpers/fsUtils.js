@@ -24,11 +24,16 @@ const readAndAppend = (content, file) => {
     if (err) {
       console.error(err);
     } else {
-      const parsedData = JSON.parse(data);
-      parsedData.push(content);
-      writeToFile(file, parsedData);
+      let parsedNotes = [].concat(JSON.parse(data));
+      
+      parsedNotes.push(content);
+            let newData = JSON.stringify(parsedNotes);
+            fs.writeFile('./db/db.json', newData, (err) => {
+                if (err) {
+                 console.log(err);      
     }
   });
+}
+});
 };
-
 module.exports = { readFromFile, writeToFile, readAndAppend };

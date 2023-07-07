@@ -1,1 +1,4 @@
-[{"title":"new title","text":"new text"},{"title":"debug again","text":"lets a go"},"[\n    {\"title\": \"new title\",\n    \"text\": \"new text\"}\n]"]
+[
+    {"title": "new title",
+    "text": "new text"}
+]

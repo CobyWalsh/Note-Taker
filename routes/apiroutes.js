@@ -71,7 +71,7 @@ router.post('/notes', (req, res) => {
         // const dataArray = JSON.parse(data)
         // otherwise if no error, add the title and text to the db.json file
         if (req.body) {
-            const noteToAdd = {
+            const newNote = {
                 title,
                 text,
                 id: uuidv1()

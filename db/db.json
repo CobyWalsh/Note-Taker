@@ -1,8 +1,4 @@
 [
-    {
-        "title": "New title",
-        "text": "New text"
-    },
-    "[\n    {\"title\": \"New title\",\n    \"text\": \"New text\"}\n]",
-    "[\n    {\n        \"title\": \"New title\",\n        \"text\": \"New text\"\n    },\n    \"[\\n    {\\\"title\\\": \\\"New title\\\",\\n    \\\"text\\\": \\\"New text\\\"}\\n]\"\n]"
+    {"title": "new title",
+    "text": "new text"}
 ]

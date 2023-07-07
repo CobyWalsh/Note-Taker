@@ -56,7 +56,7 @@ router.post('/notes', (req, res) => {
     // destructure the note title and the note text from the body!
     const { title, text } = req.body;
     console.log('title and text is', title, text);
-    fs.readFile("db/db.json", "utf8", (err, data) => {
+    fs.readFile("./db/db.json", "utf8", (err, data) => {
         if (err) throw err;
         console.log('data is ', data);
         // const dataArray = JSON.parse(data)
@@ -79,10 +79,10 @@ router.post('/notes', (req, res) => {
         // dataArray.push(noteToAdd);
         // now, rewrite the contents of the db.json file with the updated data array
         
-        // fs.writeFile('db/db.json', JSON.stringify(data), (err) =>
-        //     err ? console.error(err) : console.log('Success!')
-        // )
-        // res.status(200).json(data);
+//         fs.writeFile('db/db.json', JSON.stringify(data), (err) =>
+//             err ? console.error(err) : console.log('Success!')
+//         )
+//         res.status(200).json(data);
     });
 });
 

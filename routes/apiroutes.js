@@ -10,7 +10,7 @@ const {
 
 
 // gets and reads the notes from the db and browser
-router.get('/notes_id', (req, res) => {
+router.get('/notes/:id', (req, res) => {
     const notesId = req.params.notes_id;
     readFromFile('./db/db.json')
         .then((data) => JSON.parse(data))
@@ -37,7 +37,7 @@ router.get('/notes', (req, res) => {
 });
 
 // DELETE Route for a specific tip
-router.delete('/notes_id', (req, res) => {
+router.delete('/notes/:id', (req, res) => {
     const notesId = req.params.notes_id;
     readFromFile('./db/db.json')
         .then((data) => JSON.parse(data))
@@ -65,9 +65,9 @@ router.post('/notes', (req, res) => {
     // destructure the note title and the note text from the body!
     const { title, text } = req.body;
     console.log('title and text is', title, text);
-    fs.readFile("./db/db.json", "utf8", (err, data) => {
+    fs.readFile("./db/db.json", "utf8", (err, newNote) => {
         if (err) throw err;
-        console.log('data is ', data);
+        console.log('data is ', newNote);
         // const dataArray = JSON.parse(data)
         // otherwise if no error, add the title and text to the db.json file
         if (req.body) {
@@ -77,7 +77,7 @@ router.post('/notes', (req, res) => {
                 id: uuidv1()
             };
 
-            readAndAppend(data, './db/db.json');
+            readAndAppend(newNote, './db/db.json');
             res.json(`Tip added successfully 🚀`);
         } else {
             res.error('Error in adding tip');

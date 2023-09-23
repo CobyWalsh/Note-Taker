@@ -14,6 +14,9 @@ app.use(express.static('public'))
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes);
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
 // makes sure the port is listening to our 3000 port
 app.listen(PORT, function() {
     console.log("app listening on PORT: " + PORT);

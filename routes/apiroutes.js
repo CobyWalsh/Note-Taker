@@ -24,13 +24,11 @@ router.get('/notes/:id', (req, res) => {
 
 
 router.get('/notes', (req, res) => {
-    res.json({
-        title: "hdhd",
-        text: "asdasd"
-    })
+    console.log(req.body);
     console.log(__dirname)
     fs.readFile("./db/db.json", "utf8", (err, data) => {
         console.log(data)
+        res.json(JSON.parse(data));
         if (err) throw err;
 
     });
@@ -59,8 +57,6 @@ router.post('/notes', (req, res) => {
     console.log('hitting /api/notes route');
 
     const newNote = req.body;
-
-    readAndAppend(newNote, './db/db.json');
 
     // destructure the note title and the note text from the body!
     const { title, text } = req.body;
